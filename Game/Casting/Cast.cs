@@ -86,6 +86,7 @@ namespace Unit05.Game.Casting
             return result;
         }
 
+
         /// <summary>
         /// Removes the given actor from the given group.
         /// </summary>
