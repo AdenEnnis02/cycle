@@ -14,6 +14,8 @@ namespace Unit05.Game.Scripting
     {
         private KeyboardService keyboardService;
         private Point direction = new Point(Constants.CELL_SIZE, 0);
+        private Point direction2 = new Point(Constants.CELL_SIZE, 0);
+
 
         /// <summary>
         /// Constructs a new instance of ControlActorsAction using the given KeyboardService.
@@ -53,6 +55,38 @@ namespace Unit05.Game.Scripting
             Snake PlayerOne = (Snake)cast.GetFirstActor("PlayerOne");
             PlayerOne.TurnHead(direction);
 
+
+            // left
+            if (keyboardService.IsKeyDown("j"))
+            {
+                direction2 = new Point(-Constants.CELL_SIZE, 0);
+            }
+
+            // right
+            if (keyboardService.IsKeyDown("l"))
+            {
+                direction2 = new Point(Constants.CELL_SIZE, 0);
+            }
+
+            // up
+            if (keyboardService.IsKeyDown("k"))
+            {
+                direction2 = new Point(0, -Constants.CELL_SIZE);
+            }
+
+            // down
+            if (keyboardService.IsKeyDown("i"))
+            {
+                direction2 = new Point(0, Constants.CELL_SIZE);
+            }
+
+            Snake PlayerTwo = (Snake)cast.GetFirstActor("PlayerTwo");
+            PlayerTwo.TurnHead(direction);
         }
+
+        
+            
+
+        
     }
 }
