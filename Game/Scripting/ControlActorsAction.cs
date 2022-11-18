@@ -13,8 +13,8 @@ namespace Unit05.Game.Scripting
     public class ControlActorsAction : Action
     {
         private KeyboardService keyboardService;
-        private Point direction = new Point(Constants.CELL_SIZE, 0);
-        private Point direction2 = new Point(Constants.CELL_SIZE, 0);
+        private Point direction = new Point(0, -Constants.CELL_SIZE);
+        private Point direction2 = new Point(0, -Constants.CELL_SIZE);
 
 
         /// <summary>
@@ -69,19 +69,19 @@ namespace Unit05.Game.Scripting
             }
 
             // up
-            if (keyboardService.IsKeyDown("k"))
+            if (keyboardService.IsKeyDown("i"))
             {
                 direction2 = new Point(0, -Constants.CELL_SIZE);
             }
 
             // down
-            if (keyboardService.IsKeyDown("i"))
+            if (keyboardService.IsKeyDown("k"))
             {
                 direction2 = new Point(0, Constants.CELL_SIZE);
             }
 
             Snake PlayerTwo = (Snake)cast.GetFirstActor("PlayerTwo");
-            PlayerTwo.TurnHead(direction);
+            PlayerTwo.TurnHead(direction2);
         }
 
         

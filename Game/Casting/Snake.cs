@@ -15,9 +15,10 @@ namespace Unit05.Game.Casting
         /// <summary>
         /// Constructs a new instance of a Snake.
         /// </summary>
-        public Snake()
+        public Snake(Color color, int startingX, int startingY)
         {
-            PrepareBody();
+            SetColor(color);
+            PrepareBody(startingX, startingY);
         }
 
         /// <summary>
@@ -51,22 +52,20 @@ namespace Unit05.Game.Casting
         /// Grows the snake's tail by the given number of segments.
         /// </summary>
         /// <param name="numberOfSegments">The number of segments to grow.</param>
-        public void GrowTail(int numberOfSegments)
+        public void GrowTail()
         {
-            for (int i = 0; i < numberOfSegments; i++)
-            {
-                Actor tail = segments.Last<Actor>();
-                Point velocity = tail.GetVelocity();
-                Point offset = velocity.Reverse();
-                Point position = tail.GetPosition().Add(offset);
+            Actor tail = segments.Last<Actor>();
+            Point velocity = tail.GetVelocity();
+            Point offset = velocity.Reverse();
+            Point position = tail.GetPosition().Add(offset);
 
-                Actor segment = new Actor();
-                segment.SetPosition(position);
-                segment.SetVelocity(velocity);
-                segment.SetText("#");
-                segment.SetColor(Constants.GREEN);
-                segments.Add(segment);
-            }
+            Actor segment = new Actor();
+            segment.SetPosition(position);
+            segment.SetVelocity(velocity);
+            segment.SetText("#");
+            segment.SetColor(GetColor());
+            segments.Add(segment);
+            
         }
 
         /// <inheritdoc/>
@@ -98,17 +97,15 @@ namespace Unit05.Game.Casting
         /// <summary>
         /// Prepares the snake body for moving.
         /// </summary>
-        private void PrepareBody()
+        private void PrepareBody(int x, int y)
         {
-            int x = Constants.MAX_X / 2;
-            int y = Constants.MAX_Y / 2;
 
             for (int i = 0; i < Constants.SNAKE_LENGTH; i++)
             {
-                Point position = new Point(x - i * Constants.CELL_SIZE, y);
-                Point velocity = new Point(1 * Constants.CELL_SIZE, 0);
+                Point position = new Point(x, y + i * Constants.CELL_SIZE);
+                Point velocity = new Point(0, -1 * Constants.CELL_SIZE);
                 string text = i == 0 ? "8" : "#";
-                Color color = i == 0 ? Constants.YELLOW : Constants.GREEN;
+                Color color = i == 0 ? Constants.YELLOW : GetColor();
 
                 Actor segment = new Actor();
                 segment.SetPosition(position);
@@ -120,3 +117,5 @@ namespace Unit05.Game.Casting
         }
     }
 }
+
+                //Point position = new Point(x - i * Constants.CELL_SIZE, y);
